@@ -15,7 +15,7 @@ app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587   # 465 for SMTP, 587 for TLS
 app.config["MAIL_USE_SSL"] = False
 app.config["MAIL_USERNAME"] = "SENDER_EMAIL_ADDRESS"          # Sender email address
-app.config["MAIL_PASSWORD"] = os.getenv("PASSWORD")         # Sender email password, checks for environment variable PASSWORD
+app.config["MAIL_PASSWORD"] = os.getenv("PASSWORD")         # Sender email password
 app.config["MAIL_USE_TLS"] = True
 
 db = SQLAlchemy(app)
@@ -47,9 +47,10 @@ def verify():
     
     link = url_for('validate', token=user_token, _external=True)
 
-    # Sends email with verification link
-    message_body = "Thank you for subscribing to our mailing list!"\
-                    " Click this link to verify your email: {}".format(link)
+    # Sends email with timed verification link
+    message_body = "Thank you for subscribing to our mailing list!\n"\
+                    "The link will expire in 1 hour!\n"\
+                    "Please click this link to verify your email: {}".format(link)
     message = Message("Please Confirm your email!",
                     sender=app.config["MAIL_USERNAME"], 
                     recipients=[rec_email],
