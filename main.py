@@ -47,7 +47,7 @@ def verify():
     
     link = url_for('validate', token=user_token, _external=True)
 
-    # Sends email with verification link
+    # Sends email with timed verification link
     message_body = "Thank you for subscribing to our mailing list!"\
                     " Click this link to verify your email: {}".format(link)
     message = Message("Please Confirm your email!",
