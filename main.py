@@ -14,8 +14,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{app.root_path}/instance/ema
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587   # 465 for SMTP, 587 for TLS
 app.config["MAIL_USE_SSL"] = False
-app.config["MAIL_USERNAME"] = "SENDER_EMAIL_ADDRESS"          # Sender email address
-app.config["MAIL_PASSWORD"] = os.getenv("PASSWORD")         # Sender email password
+app.config["MAIL_USERNAME"] = os.getenv("EMAIL_ADDRESS")            # Sender email address set in Environment Variables 
+app.config["MAIL_PASSWORD"] = os.getenv("PASSWORD")                 # Sender email password set in Environment Variables
 app.config["MAIL_USE_TLS"] = True
 
 db = SQLAlchemy(app)
