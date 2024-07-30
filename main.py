@@ -7,16 +7,17 @@ import os
 
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = os.urandom(12)       # Randomly generates secret key
-# Changes directory of where data.db is stored and used from
-# app.root_path is absolute path to current python app directory
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{app.root_path}/instance/email.db"
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 587   # 465 for SMTP, 587 for TLS
-app.config["MAIL_USE_SSL"] = False
-app.config["MAIL_USERNAME"] = os.getenv("EMAIL_ADDRESS")            # Sender email address set in Environment Variables 
-app.config["MAIL_PASSWORD"] = os.getenv("PASSWORD")                 # Sender email password set in Environment Variables
-app.config["MAIL_USE_TLS"] = True
+# Sets configuration for app
+app.config.update(dict(
+    SECRET_KEY = os.urandom(12),
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{app.root_path}/instance/email.db",
+    MAIL_SERVER = "smtp.gmail.com",
+    MAIL_PORT = 587,
+    MAIL_USE_SSL = False,
+    MAIL_USERNAME = os.getenv("EMAIL_ADDRESS"),
+    MAIL_PASSWORD = os.getenv("PASSWORD"),
+    MAIL_USE_TLS = True
+))
 
 db = SQLAlchemy(app)
 
